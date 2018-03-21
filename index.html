@@ -36,12 +36,21 @@
   <script>
 
     $(document).ready(function(){
+      console.log('ready');
       var width = window.innerWidth;
       var height = window.innerHeight;
+
+      var prWhiteSmoke, projects;
 
       var snap = Snap('#svgContainer');
       Snap.load("svg/Projects.svg", (data)=>{
           snap.append(data);
+
+          prWhiteSmoke = snap.select('#prWhiteSmoke');
+          var prWhiteSmokeh = prWhiteSmoke.getBBox().height;
+          prWhiteSmoke.transform(`t0,${prWhiteSmokeh}`);
+          prWhiteSmoke.animate({transform: 't0,0'}, 1000)
+
       }, (scope)=>{
         console.log(scope);
       });
@@ -50,7 +59,24 @@
       $('#svgContainer')
         .css('position', 'absolute')
         .css('bottom', '0')
-        .css('width', '100%');
+        .css('width', '100%')
+        .css('overflow', 'hidden');
+
+
+      orientationCheck();
+
+      function initLandscape(){
+
+      }
+
+      function initVertical(){
+        alert('Change to landscape');
+        //$('#svgContainer').css('bottom', `${}`);
+      }
+      // $('#Projects').animate({transform: 't0,600'}, 1000, mina.bounce);
+
+
+
 
       function orientationCheck(){
         if(width<height){
@@ -60,14 +86,6 @@
           console.log('landscape');
           initLandscape();
         }
-      };
-
-      function initLandscape(){
-
-      }
-
-      function initVertical(){
-        $('#svgContainer').css('height', '100%');
       }
 
       $(window).resize(function(){
