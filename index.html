@@ -29,12 +29,11 @@
   <script>
 
     $(document).ready(function(){
-      console.log('ready');
       var width = window.innerWidth;
       var height = window.innerHeight;
+      var snap = Snap('#svgContainer');
 
       function loadProjects(){
-        var snap = Snap('#svgContainer');
         Snap.load("svg/Projects.svg", (data)=>{
             snap.append(data);
 
@@ -250,7 +249,8 @@
                   Snap.animate(Number($('#svgContainer').css('height').replace('px','')),0, function( value ){
                          $('#svgContainer').css('height', `${value}px`);
                   },1000,mina.backinout , ()=>{
-                    $('#svgContainer').remove();
+                    $('#svgContainer').find('svg').remove();
+
                   })
                 });
               });
@@ -286,7 +286,7 @@
 
         });
 
-
+      function initSvgContainer(){
         $('#svgContainer')
           .css('position', 'absolute')
           .css('bottom', '0')
@@ -295,7 +295,15 @@
           .css('background-color', '#151515');
       }
 
-      loadProjects();
+      }
+      function loadAbout(){
+        Snap.load("svg/About.svg", (data)=>{
+          $('#svgContainer').attr({bottom: 0});
+          snap.append(data);
+        });
+      }
+      //loadProjects();
+      loadAbout();
 
       orientationCheck();
 
