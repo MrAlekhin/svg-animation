@@ -26,6 +26,7 @@
 
   <script src="js/snap.svg.js"></script>
   <script src="js/jquery.js"></script>
+  <script src="js/screenfull.js"></script>
   <script>
 
     $(document).ready(function(){
@@ -33,10 +34,45 @@
       var height = window.innerHeight;
       var snap = Snap('#svgContainer');
 
+      function initSvgContainerLandscape(){
+        $('#svgContainer')
+          .css('position', 'absolute')
+          .css('bottom', '0')
+          .css('width', '100%')
+          .css('height', '100%')
+          .css('overflow', 'hidden')
+          .css('background', '#151515')
+
+          $('#svgContainer').find('svg')
+            .css('position', 'absolute')
+            .css('bottom', '0')
+            .css('right', '')
+            .css('top', '')
+            .css('height', '100%')
+            .css('width', '100%');
+      }
+
+      function initSvgContainerVertical(){
+        $('#svgContainer')
+          .css('position', 'absolute')
+          .css('bottom', '0')
+          .css('width', '100%')
+          .css('height', '100%')
+          .css('overflow', 'hidden')
+          .css('background', '#151515')
+
+        $('#svgContainer').find('svg')
+          .css('position', 'absolute')
+          .css('bottom', '0')
+          .css('right', '0')
+          .css('top', '10%')
+          .css('height', '100%')
+          .css('width', '190%');
+      }
+
       function loadProjects(){
         Snap.load("svg/Projects.svg", (data)=>{
             snap.append(data);
-
             //animate and declare Smoke
             prWhiteSmoke = snap.select('#prWhiteSmoke');
             var prWhiteSmokeh = prWhiteSmoke.getBBox().height;
@@ -258,7 +294,11 @@
             }
 
             $("#prShuttle").click(()=>{
+              if (screenfull.enabled) {
+            		screenfull.request(document.documentElement);
+            	}
               removeObjects();
+
             });
 
             $("#prShuttle").mousedown(function(){
@@ -285,16 +325,6 @@
 
 
         });
-
-      function initSvgContainer(){
-        $('#svgContainer')
-          .css('position', 'absolute')
-          .css('bottom', '0')
-          .css('width', '100%')
-          .css('overflow', 'hidden')
-          .css('background-color', '#151515');
-      }
-
       }
       function loadAbout(){
         Snap.load("svg/About.svg", (data)=>{
@@ -302,9 +332,8 @@
           snap.append(data);
         });
       }
-      //loadProjects();
-      loadAbout();
-
+      loadProjects();
+      //loadAbout();
       orientationCheck();
 
       function initLandscape(){
@@ -312,7 +341,7 @@
       }
 
       function initVertical(){
-        alert('Change to landscape');
+
         //$('#svgContainer').css('bottom', `${}`);
       }
       // $('#Projects').animate({transform: 't0,600'}, 1000, mina.bounce);
@@ -321,12 +350,16 @@
 
 
       function orientationCheck(){
+        width = window.innerWidth;
+        height = window.innerHeight;
         if(width<height){
           console.log('vertical');
           initVertical();
+          initSvgContainerVertical();
         }else{
           console.log('landscape');
           initLandscape();
+          initSvgContainerLandscape();
         }
       }
 
