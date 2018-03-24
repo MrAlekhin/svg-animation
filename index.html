@@ -99,7 +99,6 @@
             Snap.select('#prDescription').transform(`s0,0${descPos}`);
 
 
-
             //Animate Planet
             Snap.select('#prSaturnPlanet').transform(`s0,0`);
             Snap.select('#prSaturnPlanet').animate({transform: 's1,1'}, 500, mina.backout);
@@ -210,13 +209,13 @@
             function smokeThreeUp(){
               smokeThree.animate({
                 transform: 'translate(0,-50)',
-                opacity: '1'
+                opacity: '0.5'
               }, 2000, mina.easeinout);
             }
 
             function smokeThreeDown() {
               smokeThree.animate({
-                  transform: 'translate(-30,0)',
+                  transform: 'translate(0,0)',
                   opacity: '-0.5'
                }, 2000, mina.easeinout);
             };
@@ -225,14 +224,14 @@
               prWhiteSmoke.animate({
                   transform: 'translate(0,0)',
                   opacity: '0'
-               }, 2000, mina.easeinout);
+               }, 1500, mina.easeinout);
             }
 
             function whiteSmokeDown(){
               prWhiteSmoke.animate({
                   transform: 'translate(0,20)',
-                  opacity: '1'
-               }, 2000, mina.easeinout);
+                  opacity: '0.5'
+               }, 1500, mina.easeinout);
             }
 
             function removeObjects(){
