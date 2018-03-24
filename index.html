@@ -73,6 +73,7 @@
       function loadProjects(){
         Snap.load("svg/Projects.svg", (data)=>{
             snap.append(data);
+            orientationCheck();
             //animate and declare Smoke
             prWhiteSmoke = snap.select('#prWhiteSmoke');
             var prWhiteSmokeh = prWhiteSmoke.getBBox().height;
@@ -330,6 +331,7 @@
         Snap.load("svg/About.svg", (data)=>{
           $('#svgContainer').attr({bottom: 0});
           snap.append(data);
+          orientationCheck();
         });
       }
       loadProjects();
