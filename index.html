@@ -47,7 +47,6 @@
             .css('position', 'absolute')
             .css('bottom', '0')
             .css('right', '')
-            .css('top', '')
             .css('height', '100%')
             .css('width', '100%');
       }
@@ -65,7 +64,6 @@
           .css('position', 'absolute')
           .css('bottom', '0')
           .css('right', '0')
-          .css('top', '10%')
           .css('height', '100%')
           .css('width', '190%');
       }
@@ -298,7 +296,6 @@
             		screenfull.request(document.documentElement);
             	}
               removeObjects();
-
             });
 
             $("#prShuttle").mousedown(function(){
@@ -331,18 +328,96 @@
           $('#svgContainer').attr({bottom: 0});
           snap.append(data);
           orientationCheck();
+
+          var abMoon = Snap('#abMoon');
+          var abTitle = Snap('#abTitle');
+          var abDescription = Snap('#abDescription');
+          var abSpaceMan = Snap('#abSpaceMan');
+          var abHandOne = Snap('#abHandOne');
+          var abHandTwo = Snap('#abHandTwo');
+          var abComment = Snap('#abComment');
+          var abCircle = Snap('#abCircle');
+          var abCabel = Snap('#abCabel');
+
+          abMoon.attr({transform: 'scale(0,0)', 'transform-origin': '110% 50%'});
+          abSpaceMan.attr({transform: 'scale(0,0)', 'transform-origin': '50% 50%'});
+
+          var titlePos = abTitle.transform().string;
+          var descritionPos = abDescription.transform().string;
+          abTitle.transform(`scale(0,0)`);
+
+          abDescription.attr({transform: 'scale(0,0)'});
+          abComment.attr({transform: 'scale(0,0)', 'transform-origin': '60% top'});
+          abCabel.attr({
+            transform: 'scale(0,0)',
+            'transform-origin': '60% 100%'});
+
+          //animate abMoon
+          abMoon.animate({transform: 'scale(1,1)'}, 500, mina.backout, ()=>{
+            moonRound();
+          });
+          function moonRound(){
+            Snap.animate(0,360, function( value ){
+            abMoon.attr({
+              transform: `rotate(${value})`
+            })
+          },30000, ()=>{
+            abMoon.attr({
+              transform: `rotate(0)`
+            })
+            moonRound()})
+          }
+
+          //animate abSpaceMan
+
+
+          abTitle.animate({transform: `s1,1${titlePos}`}, 400, mina.elastic, ()=>{
+            abDescription.animate({transform: `s1,1${descritionPos}`}, 400, mina.elastic, ()=>{
+              abSpaceMan.animate({transform: 'scale(1,1)'}, 400, mina.elastic, ()=>{
+                abCabel.animate({transform: 'scale(1,1)'}, 400, mina.elastic, ()=>{
+                  abComment.animate({transform: 'scale(1,1)'}, 400, mina.elastic);
+                });
+              });
+            });
+          });
+
+          //Animate Circle
+          abCircle.attr({
+            strokeWidth: 2, // CamelCase...
+            "stroke-opacity": 0.5, // or dash-separated names
+            "stroke-dasharray": 5000,
+            "strokeDashoffset": 0
+          });
+          Snap.animate(5000,0, function( value ){
+                 abCircle.attr({ 'strokeDashoffset': value })
+          },3000)
+
         });
       }
-      loadProjects();
-      //loadAbout();
+      //loadProjects();
+      loadAbout();
       orientationCheck();
 
       function initLandscape(){
-
+        if(Snap.select('#prComment')){
+          Snap.select('#prComment').attr({
+            transform: '',
+          })
+          Snap.select('#prComment').select('polygon').attr({
+            visibility: ''
+          });
+        }
       }
 
       function initVertical(){
-
+        if(Snap.select('#prComment')){
+          Snap.select('#prComment').attr({
+            transform: 'translate(500, 400)',
+          })
+          Snap.select('#prComment').select('polygon').attr({
+            visibility: 'hidden'
+          });
+        }
         //$('#svgContainer').css('bottom', `${}`);
       }
       // $('#Projects').animate({transform: 't0,600'}, 1000, mina.bounce);
@@ -357,6 +432,7 @@
           console.log('vertical');
           initVertical();
           initSvgContainerVertical();
+
         }else{
           console.log('landscape');
           initLandscape();
