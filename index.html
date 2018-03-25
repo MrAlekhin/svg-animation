@@ -358,17 +358,12 @@
           });
           function moonRound(){
             Snap.animate(0,360, function( value ){
-            abMoon.attr({
-              transform: `rotate(${value})`
-            })
-          },30000, ()=>{
-            abMoon.attr({
-              transform: `rotate(0)`
-            })
-            moonRound()})
+              abMoon.attr({transform: `rotate(${value})`});
+            },30000, ()=>{
+                abMoon.attr({transform: `rotate(0)`});
+                moonRound()
+              })
           }
-
-          //animate abSpaceMan
 
 
           abTitle.animate({transform: `s1,1${titlePos}`}, 400, mina.elastic, ()=>{
@@ -378,6 +373,8 @@
                   abComment.animate({transform: 'scale(1,1)'}, 400, mina.elastic, ()=>{
                     moveSpaceManUp();
                     moveSpaceCabelUp();
+                    firstHandMoveUp();
+                    secondHandMoveUp();
                   });
                 });
               });
@@ -386,8 +383,8 @@
 
           //Animate Circle
           abCircle.attr({
-            strokeWidth: 2, // CamelCase...
-            "stroke-opacity": 0.5, // or dash-separated names
+            strokeWidth: 2,
+            "stroke-opacity": 0.5,
             "stroke-dasharray": 5000,
             "strokeDashoffset": 0
           });
@@ -396,7 +393,7 @@
           },3000)
 
           function moveSpaceManUp(){
-            abSpaceMan.animate({transform: 'translate(-5, 30)'}, 5000, ()=>moveSpaceManDown());
+            abSpaceMan.animate({transform: 'translate(-30, 30)'}, 5000, ()=>moveSpaceManDown());
           }
           function moveSpaceManDown(){
             abSpaceMan.animate({transform: 'translate(0, -20)'}, 5000, ()=>moveSpaceManUp());
@@ -407,16 +404,75 @@
           function moveSpaceCabelDown(){
             abCabel.animate({transform: 'translate(-20, 0)'}, 5000, ()=>moveSpaceCabelUp());
           }
-        });
 
-
-        function handsAnimation(){
-          function firstHandMove(){
-
+          function firstHandMoveUp(){
+            $('#abHandOne').css("transform-origin",`${abHandOne.getBBox().x + abHandOne.getBBox().width - 5}px ${abHandOne.getBBox().y + abHandOne.getBBox().height-20}px`);
+            Snap.animate(0, -30, function(value){
+              abHandOne.attr('transform', `rotate(${value})`)
+            }, 5000, ()=>firstHandMoveDown())
           }
-        }
+          function firstHandMoveDown(){
+            Snap.animate(-30, 0, function(value){
+              abHandOne.attr('transform', `rotate(${value})`)
+            }, 5000, ()=>firstHandMoveUp())
+          }
 
+          function secondHandMoveUp(){
+            $('#abHandTwo').css("transform-origin",`${abHandTwo.getBBox().x + abHandTwo.getBBox().width - 5}px ${abHandTwo.getBBox().y + abHandTwo.getBBox().height-20}px`);
+            Snap.animate(0, -20, function(value){
+              abHandTwo.attr('transform', `rotate(${value})`)
+            }, 5000, ()=>secondHandMoveDown())
+          }
+          function secondHandMoveDown(){
+            Snap.animate(-20, 0, function(value){
+              abHandTwo.attr('transform', `rotate(${value})`)
+            }, 5000, ()=>secondHandMoveUp())
+          }
+
+          function  removeObjects(){
+            abTitle.animate
+          }
+
+          $('#abSpaceMan').mousedown(()=>{
+            abSpaceMan.stop();
+            abTitle.animate({transform: `s0,0${titlePos}`}, 400, mina.elastic, ()=>{
+              abDescription.animate({transform: `s0,0${descritionPos}`}, 400, mina.elastic, ()=>{
+                abCabel.animate({transform: 'scale(0,0)'}, 400, mina.elastic, ()=>{
+                  abCabel.stop();
+                  abCabel.attr({visibility: 'hidden'});
+                  abComment.animate({transform: 'scale(0,0)'}, 400, mina.elastic, ()=>{
+                    abCircle.animate({transform: 'scale(0,0)'}, 400, mina.backout)
+                    abMoon.animate({transform: 'scale(0,0)'}, 400, mina.backout, ()=>{
+                      abMoon.stop();
+                      abMoon.attr({visibility: 'hidden'});
+                      $('#svgContainer').css('top', `0px`)
+                      Snap.animate(Number($('#svgContainer').css('height').replace('px','')),0, function( value ){
+                             $('#svgContainer').css('height', `${value}px`);
+                      },1000,mina.backinout , ()=>{
+                        $('#svgContainer').find('svg').remove();
+                      })
+                    });
+                  });
+                });
+              });
+            });
+            abSpaceMan.attr({'transform-origin': '50% 0'});
+            Snap.animate(1, 0.2, function(value){
+              abSpaceMan.attr({transform: `scale(${value},${value}))`});
+            }, 6000, ()=>abSpaceMan.stop());
+          });
+
+
+          $('#abSpaceMan').click(()=>{
+
+
+          });
+        });
       }
+
+
+
+
       //loadProjects();
       loadAbout();
       orientationCheck();
