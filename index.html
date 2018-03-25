@@ -375,7 +375,10 @@
             abDescription.animate({transform: `s1,1${descritionPos}`}, 400, mina.elastic, ()=>{
               abSpaceMan.animate({transform: 'scale(1,1)'}, 400, mina.elastic, ()=>{
                 abCabel.animate({transform: 'scale(1,1)'}, 400, mina.elastic, ()=>{
-                  abComment.animate({transform: 'scale(1,1)'}, 400, mina.elastic);
+                  abComment.animate({transform: 'scale(1,1)'}, 400, mina.elastic, ()=>{
+                    moveSpaceManUp();
+                    moveSpaceCabelUp();
+                  });
                 });
               });
             });
@@ -392,7 +395,27 @@
                  abCircle.attr({ 'strokeDashoffset': value })
           },3000)
 
+          function moveSpaceManUp(){
+            abSpaceMan.animate({transform: 'translate(-5, 30)'}, 5000, ()=>moveSpaceManDown());
+          }
+          function moveSpaceManDown(){
+            abSpaceMan.animate({transform: 'translate(0, -20)'}, 5000, ()=>moveSpaceManUp());
+          }
+          function moveSpaceCabelUp(){
+            abCabel.animate({transform: 'translate(10, 0)'}, 5000, ()=>moveSpaceCabelDown());
+          }
+          function moveSpaceCabelDown(){
+            abCabel.animate({transform: 'translate(-20, 0)'}, 5000, ()=>moveSpaceCabelUp());
+          }
         });
+
+
+        function handsAnimation(){
+          function firstHandMove(){
+
+          }
+        }
+
       }
       //loadProjects();
       loadAbout();
