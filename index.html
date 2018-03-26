@@ -393,45 +393,42 @@
           },3000)
 
           function moveSpaceManUp(){
-            abSpaceMan.animate({transform: 'translate(-30, 30)'}, 5000, ()=>moveSpaceManDown());
+            abSpaceMan.animate({transform: 'translate(-30, 30)'}, 5000, mina.easeinout, ()=>moveSpaceManDown());
           }
           function moveSpaceManDown(){
-            abSpaceMan.animate({transform: 'translate(0, -20)'}, 5000, ()=>moveSpaceManUp());
+            abSpaceMan.animate({transform: 'translate(0, -20)'}, 5000, mina.easeinout, ()=>moveSpaceManUp());
           }
           function moveSpaceCabelUp(){
-            abCabel.animate({transform: 'translate(10, 0)'}, 5000, ()=>moveSpaceCabelDown());
+            abCabel.animate({transform: 'translate(10, 0)'}, 5000, mina.easeinout, ()=>moveSpaceCabelDown());
           }
           function moveSpaceCabelDown(){
-            abCabel.animate({transform: 'translate(-20, 0)'}, 5000, ()=>moveSpaceCabelUp());
+            abCabel.animate({transform: 'translate(-20, 0)'}, 5000, mina.easeinout, ()=>moveSpaceCabelUp());
           }
 
           function firstHandMoveUp(){
             $('#abHandOne').css("transform-origin",`${abHandOne.getBBox().x + abHandOne.getBBox().width - 5}px ${abHandOne.getBBox().y + abHandOne.getBBox().height-20}px`);
             Snap.animate(0, -30, function(value){
               abHandOne.attr('transform', `rotate(${value})`)
-            }, 5000, ()=>firstHandMoveDown())
+            }, 5000, mina.easeinout, ()=>firstHandMoveDown())
           }
           function firstHandMoveDown(){
             Snap.animate(-30, 0, function(value){
               abHandOne.attr('transform', `rotate(${value})`)
-            }, 5000, ()=>firstHandMoveUp())
+            }, 5000, mina.easeinout, ()=>firstHandMoveUp())
           }
 
           function secondHandMoveUp(){
             $('#abHandTwo').css("transform-origin",`${abHandTwo.getBBox().x + abHandTwo.getBBox().width - 5}px ${abHandTwo.getBBox().y + abHandTwo.getBBox().height-20}px`);
             Snap.animate(0, -20, function(value){
               abHandTwo.attr('transform', `rotate(${value})`)
-            }, 5000, ()=>secondHandMoveDown())
+            }, 5000, mina.easeinout, ()=>secondHandMoveDown())
           }
           function secondHandMoveDown(){
             Snap.animate(-20, 0, function(value){
               abHandTwo.attr('transform', `rotate(${value})`)
-            }, 5000, ()=>secondHandMoveUp())
+            }, 5000, mina.easeinout, ()=>secondHandMoveUp())
           }
 
-          function  removeObjects(){
-            abTitle.animate
-          }
 
           $('#abSpaceMan').mousedown(()=>{
             abSpaceMan.stop();
@@ -463,18 +460,79 @@
           });
 
 
-          $('#abSpaceMan').click(()=>{
+          $("#abSpaceMan").hover(function(){
+            $(this).css('cursor', 'pointer');
+          }, function(){
+            $(this).css('cursor', 'pointer');
+          });
+        });
+      }
+      function loadExperiments(){
+        Snap.load("svg/Experiments.svg", (data)=>{
+          snap.append(data);
+          orientationCheck();
+
+          var exSattelite = Snap('#exSattelite');
+          var exCircle = Snap('#exCircle');
+          var exBluePlanet = Snap('#exBluePlanet');
+          var exTitle = Snap('#exTitle');
+          var exDescription = Snap('#exDescription');
+          var exComment = Snap('#exComment');
+
+          var titlePos = exTitle.transform().string;
+          var descritionPos = exDescription.transform().string;
+
+          exBluePlanet.attr({"transform-origin": '100% 50%', transform:'scale(0,0)'});
+          exTitle.attr({transform:'scale(0,0)', "transform-origin": '50% 0'});
+          exDescription.attr({transform:'scale(0,0)', "transform-origin": '50% 0'});
+          exComment.attr({transform:'scale(0,0)', "transform-origin": '100% 100%'});
+          exSattelite.attr({transform:'scale(0,0)', "transform-origin": '50% 50%'});
+
+          exBluePlanet.animate({transform: 'scale(1,1)'}, 500, mina.backout, ()=>{
+            exTitle.animate({transform: `s1,1${titlePos}`}, 500, mina.elastic, ()=>{
+              exDescription.animate({transform: `s1,1${descritionPos}`}, 400, mina.elastic, ()=>{
+                exSattelite.animate({transform: 'scale(1,1)'}, 400, mina.backout, ()=>{
+                  exComment.animate({transform: 'scale(1,1)'}, 400, mina.elastic, ()=>{
+                    exSatteliteMoveDown();
+                  })
+                });
+              });
+            });
+          });
+
+          //Animate Circle
+          exCircle.attr({
+            strokeWidth: 2,
+            "stroke-opacity": 0.5,
+            "stroke-dasharray": 5000,
+            "strokeDashoffset": 0
+          });
+          Snap.animate(5000,0, function( value ){
+                 exCircle.attr({ 'strokeDashoffset': value })
+          },3000)
 
 
+          function exSatteliteMoveDown(){
+            exSattelite.animate({transform: 'translate(-20, 60)'}, 4000, mina.easeinout, ()=>exSatteliteMoveUp());
+          }
+
+          function exSatteliteMoveUp(){
+            exSattelite.animate({transform: 'translate(0, 0)'}, 4000, mina.easeinout, ()=>exSatteliteMoveDown());
+          }
+
+          $("#abSpaceMan").hover(function(){
+            $(this).css('cursor', 'pointer');
+          }, function(){
+            $(this).css('cursor', 'pointer');
           });
         });
       }
 
 
 
-
       //loadProjects();
-      loadAbout();
+      //loadAbout();
+      loadExperiments();
       orientationCheck();
 
       function initLandscape(){
