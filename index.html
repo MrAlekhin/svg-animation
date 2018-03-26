@@ -554,12 +554,19 @@
           });
         });
       }
+      function loadBlog(){
+        Snap.load("svg/Blog.svg", (data)=>{
+          snap.append(data);
+          orientationCheck();
+        });
+      }
 
 
 
       //loadProjects();
       //loadAbout();
-      loadExperiments();
+      //loadExperiments();
+      loadBlog();
       orientationCheck();
 
       function initLandscape(){
