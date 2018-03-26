@@ -558,6 +558,50 @@
         Snap.load("svg/Blog.svg", (data)=>{
           snap.append(data);
           orientationCheck();
+
+
+          var blGround = Snap('#blGroung');
+          var blCircle = Snap('#blCircle');
+          var blAstronaut = Snap('#blAstronaut');
+          var blComment = Snap('#blComment');
+          var blTitle = Snap('#blTitle');
+          var blDescription = Snap('#blDescription');
+          var flag = Snap('#Flag');
+
+          var titlePos = blTitle.transform().string;
+          var descritionPos = blDescription.transform().string;
+
+          blGround.attr({transform: 'scale(0,0)', "transform-origin": '100% 100%'});
+          blTitle.attr({transform:'scale(0,0)', "transform-origin": '50% 0'});
+          blDescription.attr({transform:'scale(0,0)', "transform-origin": '50% 0'});
+          blAstronaut.attr({transform:'scale(0,0)', "transform-origin": '50% 50%'});
+          flag.attr({transform:'scale(0,0)', "transform-origin": '100% 50%'});
+          blComment.attr({transform:'scale(0,0)', "transform-origin": '50% 50%'});
+
+          blGround.animate({transform: 'scale(1,1)'}, 400, mina.backout, ()=>{
+            blTitle.animate({transform: `s1,1${titlePos}`}, 400, mina.elastic, ()=>{
+              blDescription.animate({transform: `s1,1${descritionPos}`}, 400, mina.elastic, ()=>{
+                blAstronaut.animate({transform: 'scale(1,1)'}, 400, mina.backout, ()=>{
+                  flag.animate({transform: 'scale(1,1)'}, 400, mina.elastic, ()=>{
+                    blComment.animate({transform: 'scale(1,1)'}, 400, mina.elastic, ()=>{
+
+                    })
+                  })
+                });
+              });
+            });
+          });
+
+          //Animate Circle
+          blCircle.attr({
+            strokeWidth: 2,
+            "stroke-opacity": 0.5,
+            "stroke-dasharray": 5000,
+            "strokeDashoffset": 0
+          });
+          Snap.animate(5000,0, function( value ){
+                 blCircle.attr({ 'strokeDashoffset': value })
+          },3000)
         });
       }
 
