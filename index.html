@@ -520,7 +520,34 @@
             exSattelite.animate({transform: 'translate(0, 0)'}, 4000, mina.easeinout, ()=>exSatteliteMoveDown());
           }
 
-          $("#abSpaceMan").hover(function(){
+          $("#exSattelite").click(()=>{
+            exCircle.animate({transform: 'scale(0,0)'}, 500, mina.backout);
+            exBluePlanet.animate({transform: 'scale(0,0)'}, 500, mina.backout, ()=>{
+              exBluePlanet.attr({"transform-origin": '100% 50%', transform:'scale(0,0)'});
+              exTitle.animate({transform: `s0,0${titlePos}`}, 500, mina.elastic)
+              exTitle.attr({transform:'scale(0,0)', "transform-origin": '50% 0'});
+              exDescription.animate({transform: `s0,0${descritionPos}`}, 400, mina.elastic);
+              exDescription.attr({transform:'scale(0,0)', "transform-origin": '50% 0'});
+              exComment.animate({transform: 'scale(0,0)'}, 400, mina.elastic, ()=>{
+                exComment.attr({transform:'scale(0,0)', "transform-origin": '100% 100%'});
+                exSattelite.animate({transform: 'scale(0.5, 0.5)'}, 1000);
+                $('#svgContainer').css('top', `0px`)
+                Snap.animate(Number($('#svgContainer').css('height').replace('px','')),0, function( value ){
+                       $('#svgContainer').css('height', `${value}px`);
+                },1000,mina.backinout , ()=>{
+                  $('#svgContainer').find('svg').remove();
+                })
+              });
+            });
+          });
+
+
+
+
+
+
+
+          $("#exSattelite").hover(function(){
             $(this).css('cursor', 'pointer');
           }, function(){
             $(this).css('cursor', 'pointer');
