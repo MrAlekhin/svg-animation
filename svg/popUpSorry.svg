@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 21.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+<svg version="1.1" id="popUpSvg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 1920 1080" style="enable-background:new 0 0 1920 1080;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#515151;}
@@ -263,7 +263,7 @@
 	<rect x="558.6" y="336.9" class="st25" width="582.4" height="210.9"/>
 	<text transform="matrix(1 0 0 1 558.6289 360.9639)" class="st5 st26 st27">Sorry, this page is not ready yet, but it </text>
 	<text transform="matrix(1 0 0 1 558.6289 400.5639)" class="st5 st26 st27">will be published soon)</text>
-	
+
 		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="559.7" y1="453.8" x2="748.2" y2="453.8" gradientTransform="matrix(1 0 0 -1 0 1080)">
 		<stop  offset="0" style="stop-color:#66E391"/>
 		<stop  offset="1" style="stop-color:#29ABE2"/>

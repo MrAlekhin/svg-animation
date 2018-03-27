@@ -49,6 +49,13 @@
             .css('right', '')
             .css('height', '100%')
             .css('width', '100%');
+          if(Snap('#popUpSvg')){
+            if(width>850){
+              Snap('#popUp').attr({'transform-origin': `50% 50%`, transform:'scale(1,1)'})
+            }else{
+              Snap('#popUp').attr({'transform-origin': `50% 50%`, transform:'scale(1.5,1.5)'})
+            }
+          }
       }
 
       function initSvgContainerVertical(){
@@ -66,6 +73,11 @@
           .css('right', '0')
           .css('height', '100%')
           .css('width', '190%');
+
+        if(Snap('#popUpSvg')){
+          $('#popUpSvg').css('width', '100%');
+          Snap('#popUp').attr({'transform-origin': `50% 50%`, transform:'scale(2.1,2.1)'})
+        }
       }
 
       function loadProjects(){
@@ -621,6 +633,10 @@
               $('#svgContainer').find('svg').remove();
               snap.append(data);
               orientationCheck();
+              var popUp = Snap('#popUp');
+              Snap.animate(0, popUp.transform().localMatrix.a, function(value){
+                popUp.attr({transform: `scale(${value},${value})`});
+              }, 500, mina.backout);
             });
           });
 
@@ -651,12 +667,6 @@
             visibility: ''
           });
         }
-
-        if(Snap.select('#popUp')){
-          Snap.select('#popUp').attr({
-            transform: 'scale(1.5, 1.5) translate(-16%,-10%)'
-          });
-        }
       }
 
       function initVertical(){
@@ -667,12 +677,6 @@
           Snap.select('#prComment').select('polygon').attr({
             visibility: 'hidden'
           });
-
-          if(Snap.select('#popUp')){
-            Snap.select('#popUp').attr({
-              transform: 'scale(1.1, 1.1) translate(18%,0)'
-            });
-          }
         }
         //$('#svgContainer').css('bottom', `${}`);
       }
