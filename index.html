@@ -623,6 +623,9 @@
             "stroke-dasharray": 5000,
             "strokeDashoffset": 0
           });
+          Snap.animate(5000,0, function( value ){
+                 blCircle.attr({ 'strokeDashoffset': value })
+          },3000)
 
 
 
@@ -649,13 +652,86 @@
 
         });
       }
+      function loadCourses(){
+        Snap.load("svg/Courses.svg", (data)=>{
+          snap.append(data);
+          orientationCheck();
+
+          var crCircle = Snap('#crCircle');
+          var crGround = Snap('#crGround');
+          var crBoard = Snap('#crBoard');
+          var crComment = Snap('#crComment');
+          var crAstronautTeacher = Snap('#crAstronautTeacher');
+          var crHand = Snap('#crHand');
+          var crTitle = Snap('#crTitle');
+          var crDescription = Snap('#crDescription');
+
+          var titlePos = crTitle.transform().string;
+          var descritionPos = crDescription.transform().string;
+
+          crGround.attr({transform: 'scale(0,0)', "transform-origin": '100% 100%'});
+          crTitle.attr({transform:'scale(0,0)', "transform-origin": '50% 0'});
+          crDescription.attr({transform:'scale(0,0)', "transform-origin": '50% 0'});
+          crAstronautTeacher.attr({transform:'scale(0,0)', "transform-origin": '50% 50%'});
+          crBoard.attr({transform:'scale(0,0)', "transform-origin": '100% 50%'});
+          crComment.attr({transform:'scale(0,0)', "transform-origin": '50% 50%'});
+
+          crGround.animate({transform: 'scale(1,1)'}, 400, mina.backout, ()=>{
+            crTitle.animate({transform: `s1,1${titlePos}`}, 400, mina.elastic, ()=>{
+              crDescription.animate({transform: `s1,1${descritionPos}`}, 400, mina.elastic, ()=>{
+                crAstronautTeacher.animate({transform: 'scale(1,1)'}, 400, mina.backout, ()=>{
+                  crBoard.animate({transform: 'scale(1,1)'}, 400, mina.elastic, ()=>{
+                    crComment.animate({transform: 'scale(1,1)'}, 400, mina.elastic, ()=>{
+
+                    });
+                  });
+                });
+              });
+            });
+          });
+
+
+          //Animate Circle
+          crCircle.attr({
+            strokeWidth: 2,
+            "stroke-opacity": 0.5,
+            "stroke-dasharray": 5000,
+            "strokeDashoffset": 0
+          });
+          Snap.animate(5000,0, function( value ){
+                 crCircle.attr({ 'strokeDashoffset': value })
+          },3000)
+
+
+
+          $("#crAstronautTeacher").click(function(){
+            Snap.load("svg/popUpSorry.svg", (data)=>{
+              $('#svgContainer').find('svg').remove();
+              snap.append(data);
+              orientationCheck();
+              var popUp = Snap('#popUp');
+              Snap.animate(0, popUp.transform().localMatrix.a, function(value){
+                popUp.attr({transform: `scale(${value},${value})`});
+              }, 500, mina.backout);
+            });
+          });
+
+
+          $("#crAstronautTeacher").hover(function(){
+            $(this).css('cursor', 'pointer');
+          }, function(){
+            $(this).css('cursor', 'pointer');
+          });
+        });
+      }
 
 
 
       //loadProjects();
       //loadAbout();
       //loadExperiments();
-      loadBlog();
+      //loadBlog();
+      loadCourses();
       orientationCheck();
 
       function initLandscape(){
