@@ -682,7 +682,7 @@
                 crAstronautTeacher.animate({transform: 'scale(1,1)'}, 400, mina.backout, ()=>{
                   crBoard.animate({transform: 'scale(1,1)'}, 400, mina.elastic, ()=>{
                     crComment.animate({transform: 'scale(1,1)'}, 400, mina.elastic, ()=>{
-
+                      handMoveUp();
                     });
                   });
                 });
@@ -701,6 +701,19 @@
           Snap.animate(5000,0, function( value ){
                  crCircle.attr({ 'strokeDashoffset': value })
           },3000)
+
+          function handMoveUp(){
+            $('#crHand').css("transform-origin",`${crHand.getBBox().x}px ${crHand.getBBox().y + crHand.getBBox().height-40}px`);
+            Snap.animate(0, -20, function(value){
+              crHand.attr('transform', `rotate(${value})`)
+            }, 5000, mina.easeinout, ()=>handMoveDown())
+          }
+
+          function handMoveDown(){
+            Snap.animate(-20, 0, function(value){
+              crHand.attr('transform', `rotate(${value})`)
+            }, 5000, mina.easeinout, ()=>handMoveUp())
+          }
 
 
 
