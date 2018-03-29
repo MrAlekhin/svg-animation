@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
   <title>Projects</title>
   <style>
   @import url('https://fonts.googleapis.com/css?family=Lato:300');
@@ -30,6 +31,13 @@
   <script>
 
     $(document).ready(function(){
+
+      setTimeout(function(){
+    		// Hide the address bar!
+    		window.scrollTo(0, 1);
+    	}, 0);
+
+
       var width = window.innerWidth;
       var height = window.innerHeight;
       var snap = Snap('#svgContainer');
@@ -51,9 +59,19 @@
             .css('width', '100%');
           if(Snap('#popUpSvg')){
             if(width>850){
-              Snap('#popUp').attr({'transform-origin': `50% 50%`, transform:'scale(1,1)'})
+              Snap('#popUp').attr({
+                'transform-origin': `50% 50%`,
+               transform:'scale(1,1)',
+                '-webkit-transform-origin': `50% 50%`,
+                '-webkit-transform': 'scale(1,1)'
+              })
             }else{
-              Snap('#popUp').attr({'transform-origin': `50% 50%`, transform:'scale(1.5,1.5)'})
+              Snap('#popUp').attr({
+              'transform-origin': `50% 50%`,
+               transform:'scale(1.5,1.5)',
+              '-webkit-transform-origin': '50% 50%',
+                '-webkit-transform': 'scale(1.5,1.5)'
+              })
             }
           }
       }
@@ -371,8 +389,10 @@
           function moonRound(){
             Snap.animate(0,360, function( value ){
               abMoon.attr({transform: `rotate(${value})`});
+              $('#abMoon').css('-webkit-transform',`rotate(${value})`);
             },30000, ()=>{
                 abMoon.attr({transform: `rotate(0)`});
+                $('#abMoon').css('-webkit-transform', `rotate(${value})`);
                 moonRound()
               })
           }
@@ -419,25 +439,27 @@
 
           function firstHandMoveUp(){
             $('#abHandOne').css("transform-origin",`${abHandOne.getBBox().x + abHandOne.getBBox().width - 5}px ${abHandOne.getBBox().y + abHandOne.getBBox().height-20}px`);
+            $('#abHandOne').css("-webkit-transform-origin",`${abHandOne.getBBox().x + abHandOne.getBBox().width - 5}px ${abHandOne.getBBox().y + abHandOne.getBBox().height-20}px`);
             Snap.animate(0, -30, function(value){
-              abHandOne.attr('transform', `rotate(${value})`)
+              abHandOne.attr({'transform': `rotate(${value})`});
+              //$('#abHandOne').css('-webkit-transform',  )
             }, 5000, mina.easeinout, ()=>firstHandMoveDown())
           }
           function firstHandMoveDown(){
             Snap.animate(-30, 0, function(value){
-              abHandOne.attr('transform', `rotate(${value})`)
+              abHandOne.attr({'transform': `rotate(${value})`})
             }, 5000, mina.easeinout, ()=>firstHandMoveUp())
           }
 
           function secondHandMoveUp(){
             $('#abHandTwo').css("transform-origin",`${abHandTwo.getBBox().x + abHandTwo.getBBox().width - 5}px ${abHandTwo.getBBox().y + abHandTwo.getBBox().height-20}px`);
             Snap.animate(0, -20, function(value){
-              abHandTwo.attr('transform', `rotate(${value})`)
+              abHandTwo.attr({'transform': `rotate(${value})`})
             }, 5000, mina.easeinout, ()=>secondHandMoveDown())
           }
           function secondHandMoveDown(){
             Snap.animate(-20, 0, function(value){
-              abHandTwo.attr('transform', `rotate(${value})`)
+              abHandTwo.attr({'transform': `rotate(${value})`})
             }, 5000, mina.easeinout, ()=>secondHandMoveUp())
           }
 
@@ -743,7 +765,7 @@
       //loadProjects();
       loadAbout();
       //loadExperiments();
-      //sloadBlog();
+      //loadBlog();
       //loadCourses();
       orientationCheck();
 
