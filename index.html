@@ -62,15 +62,11 @@
               Snap('#popUp').attr({
                 'transform-origin': `50% 50%`,
                transform:'scale(1,1)',
-                '-webkit-transform-origin': `50% 50%`,
-                '-webkit-transform': 'scale(1,1)'
               })
             }else{
               Snap('#popUp').attr({
               'transform-origin': `50% 50%`,
                transform:'scale(1.5,1.5)',
-              '-webkit-transform-origin': '50% 50%',
-                '-webkit-transform': 'scale(1.5,1.5)'
               })
             }
           }
@@ -369,30 +365,28 @@
           var abCircle = Snap('#abCircle');
           var abCabel = Snap('#abCabel');
 
-          abMoon.attr({transform: 'scale(0,0)', 'transform-origin': '110% 50%'});
-          abSpaceMan.attr({transform: 'scale(0,0)', 'transform-origin': '50% 50%'});
+          $('#abMoon').css('transform-origin', '110% center 0px');
+
+          abSpaceMan.attr({transform: 'scale(0,0)', 'transform-origin': '50% 50% 0px'});
 
           var titlePos = abTitle.transform().string;
           var descritionPos = abDescription.transform().string;
           abTitle.transform(`scale(0,0)`);
 
           abDescription.attr({transform: 'scale(0,0)'});
-          abComment.attr({transform: 'scale(0,0)', 'transform-origin': '60% top'});
-          abCabel.attr({
-            transform: 'scale(0,0)',
-            'transform-origin': '60% 100%'});
+          abComment.attr({transform: 'scale(0,0)', 'transform-origin': '60% 100% 0px'});
+          abCabel.attr({transform: 'scale(0,0)', 'transform-origin': '60% 100% 0px'});
 
           //animate abMoon
-          abMoon.animate({transform: 'scale(1,1)'}, 500, mina.backout, ()=>{
-            moonRound();
-          });
+          // abMoon.animate({transform: 'scale(1,1)', 'transform-origin': '110% 50% 0px'}, 500, mina.backout, ()=>{
+          //   moonRound();
+          // });
+          moonRound();
           function moonRound(){
-            Snap.animate(0,360, function( value ){
-              abMoon.attr({transform: `rotate(${value})`});
-              $('#abMoon').css('-webkit-transform',`rotate(${value})`);
+            Snap.animate(0,360, ( value )=>{
+              $('#abMoon').css('transform', `rotate(${value}deg)`);
             },30000, ()=>{
-                abMoon.attr({transform: `rotate(0)`});
-                $('#abMoon').css('-webkit-transform', `rotate(${value})`);
+                $('#abMoon').css('transform', 'rotate(0deg)');
                 moonRound()
               })
           }
