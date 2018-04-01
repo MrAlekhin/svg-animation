@@ -26,7 +26,7 @@
   #About > *{transform-box: fill-box;}
 	#abDescription > *{transform-box: fill-box;}
 
-
+  #popUp > *{transform-box: fill-box;}
 
 }
 
@@ -725,13 +725,13 @@
           function handMoveUp(){
             $('#crHand').css("transform-origin",`${crHand.getBBox().x}px ${crHand.getBBox().y + crHand.getBBox().height-40}px`);
             Snap.animate(0, -20, function(value){
-              crHand.attr('transform', `rotate(${value})`)
+              $('#crHand').css('transform', `rotate(${value}deg)`)
             }, 5000, mina.easeinout, ()=>handMoveDown())
           }
 
           function handMoveDown(){
             Snap.animate(-20, 0, function(value){
-              crHand.attr('transform', `rotate(${value})`)
+              $('#crHand').css('transform', `rotate(${value}deg)`)
             }, 5000, mina.easeinout, ()=>handMoveUp())
           }
 
@@ -760,11 +760,11 @@
 
 
 
-      loadProjects();
+      //loadProjects();
       //loadAbout();
       //loadExperiments();
       //loadBlog();
-      //loadCourses();
+      loadCourses();
       orientationCheck();
 
       function initLandscape(){

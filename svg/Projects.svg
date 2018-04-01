@@ -28,9 +28,9 @@
 	.st22{fill:none;stroke:#6E6351;stroke-width:0.7344;stroke-miterlimit:10;}
 	.st23{opacity:0.5;fill:none;stroke:#FFFFFF;stroke-miterlimit:10;enable-background:new    ;}
 	.st24{fill:#FFFFFF;}
-	.st25{font-family:'Lato'; font-width: 300px;}
+	.st25{font-family:'Lato', sans-serif; font-weight: 300; margin-top: 30px }
 	.st26{font-size:100px;}
-	.st27{font-size:20px;}
+	.st27{font-size:30px;}
 </style>
 <g id="Projects">
 	<g id="prComment">
