@@ -17,9 +17,9 @@
 	.st11{fill:#1F1F1F;}
 	.st12{font-family:'ComicSansMS';}
 	.st13{font-size:21.2889px;}
-	.st14{font-family:'Lato-Light';}
+	.st14{font-family:'Lato'; font-width: 300px; }
 	.st15{font-size:100px;}
-	.st16{font-size:20px;}
+	.st16{font-size:24px;}
 </style>
 <g id="About">
 	<circle id="abCircle" class="st0" cx="1974.7" cy="517.7" r="665.2"/>
@@ -644,21 +644,21 @@
 			c0.5,2.8,0.9,5.6,0.9,8.3c0.1,2.5,0,5.1-0.2,7.5c-0.1,1.1-0.3,2.2-0.4,3.3c-0.2,1.3-0.5,2.7-0.8,4
 			C1246.1,722.5,1236.4,735.3,1222.8,742.8z"/>
 
-			<ellipse transform="matrix(0.9825 -0.1862 0.1862 0.9825 -119.146 243.4202)" class="st7" cx="1236.3" cy="756" rx="1.8" ry="1.8"/>
+			<ellipse transform="matrix(0.9825 -0.1862 0.1862 0.9825 -119.1463 243.4203)" class="st7" cx="1236.3" cy="756" rx="1.8" ry="1.8"/>
 
-			<ellipse transform="matrix(0.9825 -0.1862 0.1862 0.9825 -118.8124 244.5723)" class="st7" cx="1242.6" cy="754.8" rx="1.8" ry="1.8"/>
+			<ellipse transform="matrix(0.9825 -0.1862 0.1862 0.9825 -118.8127 244.5724)" class="st7" cx="1242.6" cy="754.8" rx="1.8" ry="1.8"/>
 
-			<ellipse transform="matrix(0.9825 -0.1863 0.1863 0.9825 -118.514 245.843)" class="st7" cx="1248.8" cy="753.5" rx="1.8" ry="1.8"/>
+			<ellipse transform="matrix(0.9825 -0.1863 0.1863 0.9825 -118.5144 245.843)" class="st7" cx="1248.8" cy="753.5" rx="1.8" ry="1.8"/>
 
-			<ellipse transform="matrix(0.9825 -0.1862 0.1862 0.9825 -118.1469 246.8578)" class="st7" cx="1255.1" cy="752.4" rx="1.8" ry="1.8"/>
+			<ellipse transform="matrix(0.9825 -0.1862 0.1862 0.9825 -118.1472 246.8579)" class="st7" cx="1255.1" cy="752.4" rx="1.8" ry="1.8"/>
 
-			<ellipse transform="matrix(0.9825 -0.1863 0.1863 0.9825 -117.8656 248.1503)" class="st7" cx="1261.4" cy="751.2" rx="1.8" ry="1.8"/>
+			<ellipse transform="matrix(0.9825 -0.1863 0.1863 0.9825 -117.8653 248.15)" class="st7" cx="1261.4" cy="751.2" rx="1.8" ry="1.8"/>
 
-			<ellipse transform="matrix(0.9825 -0.1862 0.1862 0.9825 -117.4796 249.162)" class="st7" cx="1267.7" cy="750" rx="1.8" ry="1.8"/>
+			<ellipse transform="matrix(0.9825 -0.1862 0.1862 0.9825 -117.48 249.1621)" class="st7" cx="1267.7" cy="750" rx="1.8" ry="1.8"/>
 
-			<ellipse transform="matrix(0.9825 -0.1863 0.1863 0.9825 -117.1956 250.4741)" class="st5" cx="1274.1" cy="748.8" rx="1.8" ry="1.8"/>
+			<ellipse transform="matrix(0.9825 -0.1863 0.1863 0.9825 -117.1958 250.4741)" class="st5" cx="1274.1" cy="748.8" rx="1.8" ry="1.8"/>
 
-			<ellipse transform="matrix(0.9825 -0.1863 0.1863 0.9825 -116.8617 251.6268)" class="st5" cx="1280.4" cy="747.6" rx="1.8" ry="1.8"/>
+			<ellipse transform="matrix(0.9825 -0.1863 0.1863 0.9825 -116.862 251.6268)" class="st5" cx="1280.4" cy="747.6" rx="1.8" ry="1.8"/>
 		<path class="st6" d="M1310.9,859.9l-11,2.1c-8.4,1.6-16.5-3.9-18.1-12.3l-15.7-82.8c-2.3-12.1,5.6-23.8,17.7-26l0,0
 			c12.1-2.3,23.8,5.6,26,17.7l15.3,80.5C1326.9,848.7,1320.5,858,1310.9,859.9z"/>
 		<path class="st8" d="M1278.7,742.8l0.1,0.6l-49,9.3c0.3-0.4,0.8-0.8,1.4-0.9L1278.7,742.8z"/>

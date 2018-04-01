@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <title>Projects</title>
+  <link rel="shortcut icon" href="">
   <style>
   @import url('https://fonts.googleapis.com/css?family=Lato:300');
   body{
@@ -13,9 +14,19 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: linear-gradient(black, white);
-
+    background: linear-gradient(#09203f, #537895);
   }
+  #content{
+    position:absolute;
+    background: linear-gradient(#09203f, #537895);
+    width: 100%;
+    height: 100%;
+    z-index: -1
+  }
+  #About > *{transform-box: fill-box;}
+	#abDescription > *{transform-box: fill-box;}
+
+
 
 }
 
@@ -24,6 +35,7 @@
 </head>
 <body>
   <div id="svgContainer"></div>
+  <div id="content"></div>
 
   <script src="js/snap.svg.js"></script>
   <script src="js/jquery.js"></script>
@@ -31,7 +43,6 @@
   <script>
 
     $(document).ready(function(){
-
       setTimeout(function(){
     		// Hide the address bar!
     		window.scrollTo(0, 1);
@@ -44,22 +55,28 @@
 
       function initSvgContainerLandscape(){
         $('#svgContainer')
-          .css('position', 'absolute')
-          .css('bottom', '0')
-          .css('width', '100%')
-          .css('height', '100%')
-          .css('overflow', 'hidden')
-          .css('background', 'linear-gradient(#03A9F4, #9C27B0)')
+          .css({
+            'z-index': '2',
+            'position': 'absolute',
+            'bottom': '0',
+            'width': '100%',
+            'height': '100%',
+            'overflow': 'hidden',
+            'background': 'linear-gradient(#03A9F4, #764ba2)'
+          });
 
           $('#svgContainer').find('svg')
-            .css('position', 'absolute')
-            .css('bottom', '0')
-            .css('right', '')
-            .css('height', '100%')
-            .css('width', '100%');
+            .css({
+              'z-index': '2',
+              'position': 'absolute',
+              'bottom': '0',
+              'right': '',
+              'height': '100%',
+              'width': '100%'
+            })
           if(Snap('#popUpSvg')){
             if(width>850){
-              Snap('#popUp').attr({
+              $('#popUp').css({
                 'transform-origin': `50% 50%`,
                transform:'scale(1,1)',
               })
@@ -74,19 +91,23 @@
 
       function initSvgContainerVertical(){
         $('#svgContainer')
-          .css('position', 'absolute')
-          .css('bottom', '0')
-          .css('width', '100%')
-          .css('height', '100%')
-          .css('overflow', 'hidden')
-          .css('background', 'linear-gradient(#03A9F4, #9C27B0)')
+          .css({
+            'position': 'absolute',
+            'bottom': '0',
+            'width': '100%',
+            'height': '100%',
+            'overflow': 'hidden',
+            'background': 'linear-gradient(#667eea, #764ba2)'
+          })
 
         $('#svgContainer').find('svg')
-          .css('position', 'absolute')
-          .css('bottom', '0')
-          .css('right', '0')
-          .css('height', '100%')
-          .css('width', '190%');
+          .css({
+            'position': 'absolute',
+            'bottom': '0',
+            'right': '0',
+            'height': '100%',
+            'width': '190%'
+          })
 
         if(Snap('#popUpSvg')){
           $('#popUpSvg').css('width', '100%');
@@ -355,7 +376,7 @@
           snap.append(data);
           orientationCheck();
 
-          var abMoon = Snap('#abMoon');
+          var abMoon = $('#abMoon');
           var abTitle = Snap('#abTitle');
           var abDescription = Snap('#abDescription');
           var abSpaceMan = Snap('#abSpaceMan');
@@ -365,23 +386,28 @@
           var abCircle = Snap('#abCircle');
           var abCabel = Snap('#abCabel');
 
-          $('#abMoon').css('transform-origin', '110% center 0px');
 
+          abMoon.css({transform: 'scale(0,0)','transform-origin': '50% 50% 0px'});
           abSpaceMan.attr({transform: 'scale(0,0)', 'transform-origin': '50% 50% 0px'});
+          //abHandOne.attr({'transform-origin': '100% 100% 0px'});
+          //abHandTwo.attr({'transform-origin': '100% 100% 0px'});
 
           var titlePos = abTitle.transform().string;
           var descritionPos = abDescription.transform().string;
           abTitle.transform(`scale(0,0)`);
 
           abDescription.attr({transform: 'scale(0,0)'});
-          abComment.attr({transform: 'scale(0,0)', 'transform-origin': '60% 100% 0px'});
-          abCabel.attr({transform: 'scale(0,0)', 'transform-origin': '60% 100% 0px'});
+          abComment.attr({transform: 'scale(0,0)', 'transform-origin': '50% 100% 0px'});
+          abCabel.attr({transform: 'scale(0,0)', 'transform-origin': '50% 100% 0px'});
 
-          //animate abMoon
-          // abMoon.animate({transform: 'scale(1,1)', 'transform-origin': '110% 50% 0px'}, 500, mina.backout, ()=>{
-          //   moonRound();
-          // });
-          moonRound();
+
+          Snap.animate(0, 1, (value)=>{
+            abMoon.css({transform: `scale(${value},${value})`,'transform-origin': '50% 50% 0px'});
+          }, 600, mina.backout, ()=>{
+            moonRound();
+          });
+
+          //moonRound();
           function moonRound(){
             Snap.animate(0,360, ( value )=>{
               $('#abMoon').css('transform', `rotate(${value}deg)`);
@@ -432,59 +458,37 @@
           }
 
           function firstHandMoveUp(){
-            $('#abHandOne').css("transform-origin",`${abHandOne.getBBox().x + abHandOne.getBBox().width - 5}px ${abHandOne.getBBox().y + abHandOne.getBBox().height-20}px`);
-            $('#abHandOne').css("-webkit-transform-origin",`${abHandOne.getBBox().x + abHandOne.getBBox().width - 5}px ${abHandOne.getBBox().y + abHandOne.getBBox().height-20}px`);
+             $('#abHandOne').css("transform-origin",`${abHandOne.getBBox().x + abHandOne.getBBox().width - 5}px ${abHandOne.getBBox().y + abHandOne.getBBox().height-20}px 0px`);
             Snap.animate(0, -30, function(value){
-              abHandOne.attr({'transform': `rotate(${value})`});
-              //$('#abHandOne').css('-webkit-transform',  )
+              $('#abHandOne').css({'transform': `rotate(${value}deg)`});
             }, 5000, mina.easeinout, ()=>firstHandMoveDown())
           }
           function firstHandMoveDown(){
             Snap.animate(-30, 0, function(value){
-              abHandOne.attr({'transform': `rotate(${value})`})
+              $('#abHandOne').css({'transform': `rotate(${value}deg)`});
             }, 5000, mina.easeinout, ()=>firstHandMoveUp())
           }
 
           function secondHandMoveUp(){
-            $('#abHandTwo').css("transform-origin",`${abHandTwo.getBBox().x + abHandTwo.getBBox().width - 5}px ${abHandTwo.getBBox().y + abHandTwo.getBBox().height-20}px`);
+            $('#abHandTwo').css("transform-origin",`${abHandTwo.getBBox().x + abHandTwo.getBBox().width - 5}px ${abHandTwo.getBBox().y + abHandTwo.getBBox().height-20}px 0px`);
             Snap.animate(0, -20, function(value){
-              abHandTwo.attr({'transform': `rotate(${value})`})
+              $('#abHandTwo').css({'transform': `rotate(${value}deg)`});
             }, 5000, mina.easeinout, ()=>secondHandMoveDown())
           }
           function secondHandMoveDown(){
             Snap.animate(-20, 0, function(value){
-              abHandTwo.attr({'transform': `rotate(${value})`})
+              $('#abHandTwo').css({'transform': `rotate(${value}deg)`});
             }, 5000, mina.easeinout, ()=>secondHandMoveUp())
           }
 
 
           $('#abSpaceMan').mousedown(()=>{
-            abSpaceMan.stop();
-            abTitle.animate({transform: `s0,0${titlePos}`}, 400, mina.elastic, ()=>{
-              abDescription.animate({transform: `s0,0${descritionPos}`}, 400, mina.elastic, ()=>{
-                abCabel.animate({transform: 'scale(0,0)'}, 400, mina.elastic, ()=>{
-                  abCabel.stop();
-                  abCabel.attr({visibility: 'hidden'});
-                  abComment.animate({transform: 'scale(0,0)'}, 400, mina.elastic, ()=>{
-                    abCircle.animate({transform: 'scale(0,0)'}, 400, mina.backout)
-                    abMoon.animate({transform: 'scale(0,0)'}, 400, mina.backout, ()=>{
-                      abMoon.stop();
-                      abMoon.attr({visibility: 'hidden'});
-                      $('#svgContainer').css('top', `0px`)
-                      Snap.animate(Number($('#svgContainer').css('height').replace('px','')),0, function( value ){
-                             $('#svgContainer').css('height', `${value}px`);
-                      },1000,mina.backinout , ()=>{
-                        $('#svgContainer').find('svg').remove();
-                      })
-                    });
-                  });
-                });
-              });
-            });
-            abSpaceMan.attr({'transform-origin': '50% 0'});
-            Snap.animate(1, 0.2, function(value){
-              abSpaceMan.attr({transform: `scale(${value},${value}))`});
-            }, 6000, ()=>abSpaceMan.stop());
+            $('#svgContainer').css('top', `0px`)
+              Snap.animate(Number($('#svgContainer').css('height').replace('px','')),0, function( value ){
+                     $('#svgContainer').css('height', `${value}px`);
+              },1000,mina.backinout , ()=>{
+                $('#svgContainer').find('svg').remove();
+              })
           });
 
 
