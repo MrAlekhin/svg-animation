@@ -75,14 +75,15 @@
               'width': '100%'
             })
           if(Snap('#popUpSvg')){
+            console.log('landscape');
             if(width>850){
               $('#popUp').css({
-                'transform-origin': `50% 50%`,
+                'transform-origin': `50% 50% 0px`,
                transform:'scale(1,1)',
               })
             }else{
-              Snap('#popUp').attr({
-              'transform-origin': `50% 50%`,
+              $('#popUp').css({
+              'transform-origin': `50% 50% 0px`,
                transform:'scale(1.5,1.5)',
               })
             }
@@ -110,8 +111,9 @@
           })
 
         if(Snap('#popUpSvg')){
+          console.log('hi');
           $('#popUpSvg').css('width', '100%');
-          Snap('#popUp').attr({'transform-origin': `50% 50%`, transform:'scale(2.1,2.1)'})
+          $('#popUp').css({'transform-origin': `50% 50% 0px`, transform:'scale(2.1,2.1)'});
         }
       }
 
@@ -742,9 +744,12 @@
               $('#svgContainer').find('svg').remove();
               snap.append(data);
               orientationCheck();
-              var popUp = Snap('#popUp');
-              Snap.animate(0, popUp.transform().localMatrix.a, function(value){
-                popUp.attr({transform: `scale(${value},${value})`});
+              var matrixRegex = /scale\((-?\d*\.?\d+),\s*(-?\d*\.?\d+)\)/,
+              match = Number(document.getElementById('popUp').style.transform.replace(/scale\(|,|\)/gi, '')[0]);
+
+
+              Snap.animate(0, match, function(value){
+                $('#popUp').css({ transform:`scale(${value},${value})`});
               }, 500, mina.backout);
             });
           });
