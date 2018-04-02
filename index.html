@@ -658,9 +658,9 @@
               $('#svgContainer').find('svg').remove();
               snap.append(data);
               orientationCheck();
-              var popUp = Snap('#popUp');
-              Snap.animate(0, popUp.transform().localMatrix.a, function(value){
-                popUp.attr({transform: `scale(${value},${value})`});
+              var match = Number(document.getElementById('popUp').style.transform.replace(/scale\(|,|\)/gi, '')[0]);
+              Snap.animate(0, match, function(value){
+                $('#popUp').css('transform', `scale(${value},${value})`);
               }, 500, mina.backout);
             });
           });
@@ -744,10 +744,7 @@
               $('#svgContainer').find('svg').remove();
               snap.append(data);
               orientationCheck();
-              var matrixRegex = /scale\((-?\d*\.?\d+),\s*(-?\d*\.?\d+)\)/,
               match = Number(document.getElementById('popUp').style.transform.replace(/scale\(|,|\)/gi, '')[0]);
-
-
               Snap.animate(0, match, function(value){
                 $('#popUp').css({ transform:`scale(${value},${value})`});
               }, 500, mina.backout);
@@ -768,8 +765,8 @@
       //loadProjects();
       //loadAbout();
       //loadExperiments();
-      //loadBlog();
-      loadCourses();
+      loadBlog();
+      //loadCourses();
       orientationCheck();
 
       function initLandscape(){
